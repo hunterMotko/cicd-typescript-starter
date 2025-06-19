@@ -6,7 +6,7 @@ on:
 
 jobs:
   setup:
-    name: Tests
+    name: Setup
     runs-on: ubuntu-latest
 
     steps:
@@ -23,15 +23,18 @@ jobs:
 
   tests:
     needs: setup
-    runs-on: ubuntu-latest
     name: Tests
+    runs-on: ubuntu-latest
+
     steps:
       - name: Run Tests
         run: npm run test -- --coverage
 
   style:
     needs: setup
+    name: Style
     runs-on: ubuntu-latest
+
     steps:
-    - name: Style
+    - name: Run Style Check
       run: npm run format:check
