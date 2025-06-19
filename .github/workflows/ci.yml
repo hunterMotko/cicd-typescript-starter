@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  tests:
+  setup:
     name: Tests
     runs-on: ubuntu-latest
 
@@ -21,11 +21,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+  tests:
+    needs: setup
+    runs-on: ubuntu-latest
+    name: Tests
+    steps:
       - name: Run Tests
         run: npm run test -- --coverage
 
-    name: Style
-
+  style:
+    needs: setup
+    runs-on: ubuntu-latest
     steps:
-      - name: Style
-        run: npm run format:check
+    - name: Style
+      run: npm run format:check
